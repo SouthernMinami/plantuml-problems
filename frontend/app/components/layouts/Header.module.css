@@ -1,0 +1,7 @@
+.nav li :hover {
+    color: black;
+    background-color: #7ed6ec;
+    border-radius: 5px;
+    padding: 5px;
+    transition: all 0.3s ease-in-out;
+}

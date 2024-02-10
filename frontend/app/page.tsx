@@ -3,16 +3,16 @@
 // import { Editor } from "./components/elements/Editor";
 import Editor from 'react-monaco-editor';
 
+// Home page as a playground for uml editor
 export default function Home() {
     return (
         <div>
-            <h1>aaaa</h1>
             <Editor
                 width="800"
                 height="600"
                 language="plaintext"
                 theme="vs-dark"
-                value="console.log('Hello, world!');"
+                value="@startuml\nBob -> Alice : hello\n@enduml\n"
                 options={{
                     selectOnLineNumbers: true
                 }}
