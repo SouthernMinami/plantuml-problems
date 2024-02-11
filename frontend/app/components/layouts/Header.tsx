@@ -12,7 +12,6 @@ export const Header = ({ title }: Props) => {
                 <ul className="navbar flex items-center w-full h-full space-x-4">
                     <li className="nav-item text-4xl font-bold text-white pb-2 pl-3 pr-2">
                         <Link className="flex nav-link" href="/">
-                            <img src="/assets/sq-icon.png" className="w-10" />
                             {title}
                         </Link>
                     </li>
