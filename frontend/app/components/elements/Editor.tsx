@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 
-export const Editor = () => {
-    const [editorValue, setEditorValue] = useState<string>(`@startuml\n    Bob -> Alice : hello\n@enduml`)
+type Props = {
+    editorValue: string,
+    setEditorValue: (value: string) => void
+}
+
+export const Editor = ({ editorValue, setEditorValue }: Props) => {
     const handleChange = (value: string) => {
         setEditorValue(value)
         render(value)
@@ -10,8 +14,8 @@ export const Editor = () => {
 
     const render = (value: string): void => {
         const reqJSON = {
-            "text": value,
-            "format": "png"
+            "code": value,
+            "extension": "png"
         }
 
         // fetch from /backend/api.php
@@ -38,8 +42,9 @@ export const Editor = () => {
     return (
         <div className='editor-container'>
             <MonacoEditor
-                width="800"
-                height="600"
+                className={'monaco-editor'}
+                width="50vh"
+                height="200vh"
                 language="plaintext"
                 theme="vs-dark"
                 value={editorValue}
