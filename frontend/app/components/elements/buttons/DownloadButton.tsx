@@ -7,32 +7,44 @@ type Props = {
 }
 
 export const DownloadButton = ({ code, extension }: Props) => {
+    const getContentBlob = async (url: string): Promise<Blob | null> => {
+        try {
+            const res = await fetch(url);
+            const blob = await res.blob();
+            return blob;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
 
-    const downloadFile = (extension: string) => () => {
-        // Add code here to handle the download
-        fetch('http://localhost:8003/api.php', {
-            method: 'POST',
-            body: JSON.stringify({
-                "code": code,
-                "extension": extension
-            }),
-            headers: {
-                'Content-Type': 'text/plain'
-            },
-        })
-            .then(response => response.text())
-            .then(data => {
-                const blob = new Blob([data], { type: `image/${extension}` })
-                const a = document.createElement('a')
-                a.href = URL.createObjectURL(blob)
-                a.download = `uml.${extension}`
-                a.click()
+    const downloadFile = async (extension: string) => {
+        try {
+            const res = await fetch('http://localhost:8003/api.php', {
+                method: 'POST',
+                body: JSON.stringify({
+                    "code": code,
+                    "extension": extension
+                }),
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
             })
-            .catch(error => console.error(error))
+            const url = await res.text();
+            const blob = await getContentBlob(url);
+            if (blob) {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = `plant-uml.${extension}`;
+                a.click();
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
     return (
         <a href="#" download>
-            <button className={`${styles['download-btn']}`} onClick={downloadFile(extension)}> Download File </button>
+            <button className={`${styles['download-btn']}`} onClick={() => downloadFile(extension)}> Download File </button>
         </a>
     )
 }

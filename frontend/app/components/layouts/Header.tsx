@@ -16,10 +16,10 @@ export const Header = ({ title }: Props) => {
                         </Link>
                     </li>
                     <li className="flex items-center justify-between text-slate-400">
-                        <Link href="/resume">問題一覧</Link>
+                        <Link href="/problems">問題一覧</Link>
                     </li>
                     <li className="flex items-center justify-between text-slate-400">
-                        <Link href="/works">チートシート</Link>
+                        <Link href="/cheatsheet">チートシート</Link>
                     </li>
                 </ul>
             </nav>
