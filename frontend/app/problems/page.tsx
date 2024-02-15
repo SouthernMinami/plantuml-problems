@@ -52,22 +52,22 @@ const Problems: React.FC = () => {
                             return (
                                 <tr className="hover:bg-gray-100" key={index}>
                                     <td className="px-6 py-4 w-1/4">
-                                        <Link href={`problems/${problem.id}`} className="">
+                                        <Link href={`problems/page/?problemId=${problem.id}`} className="">
                                             {problem.id}
                                         </Link>
                                     </td>
                                     <td className="px-6 py-4 w-1/4">
-                                        <Link href={`problems/${problem.id}`} className="">
+                                        <Link href={`problems/page/?problemId=${problem.id}`} className="">
                                             {problem.title}
                                         </Link>
                                     </td>
                                     <td className="px-6 py-4 w-1/4">
-                                        <Link href={`problems/${problem.id}`} className="">
+                                        <Link href={`problems/page/?problemId=${problem.id}`} className="">
                                             {problem.difficulty}
                                         </Link>
                                     </td>
                                     <td className="px-6 py-4 w-1/4">
-                                        <Link href={`problems/${problem.id}`} className="">
+                                        <Link href={`problems/page/?problemId=${problem.id}`} className="">
                                             {problem.category}
                                         </Link>
                                     </td>
