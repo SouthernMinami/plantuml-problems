@@ -2,7 +2,7 @@
 'use client';
 
 import Link from "next/link";
-import { Problem } from "../types/types";
+import { Problem } from "../../../types/types";
 import { useEffect, useState } from "react";
 
 const Problems: React.FC = () => {

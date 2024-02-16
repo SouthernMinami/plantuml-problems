@@ -10,3 +10,14 @@ export const Preview = () => {
         </div>
     )
 }
+
+export const SamplePreview = () => {
+    return (
+        <div className="preview-container">
+            <div id="preview" className="preview">
+                <h1>見本</h1>
+                <Image id="sample-img" src="" alt="sample" className="sample-img" />
+            </div>
+        </div>
+    )
+}

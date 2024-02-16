@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 import { Problem } from "@/app/types/types"
 import { useSearchParams } from 'next/navigation'
 import { Editor } from '@/app/components/elements/Editor'
-import { Preview } from '@/app/components/elements/Preview'
+import { Preview, SamplePreview } from '@/app/components/elements/Preview'
+import { SampleCodeButton } from '@/app/components/elements/buttons/SampleCodeButton'
 
 const ProblemPage = () => {
     // TODO: problemIdを取得できるようにする
@@ -14,6 +15,30 @@ const ProblemPage = () => {
     const [problem, setProblem] = useState<Problem>()
     const [editorValue, setEditorValue] = useState<string>(`@startuml\n    \n@enduml`)
 
+    const renderSampleImage = (value: string): void => {
+        const reqJSON = {
+            "code": value,
+            "extension": "png"
+        }
+
+        // fetch from /backend/api.php
+        fetch('http://localhost:8003/api.php', {
+            method: 'POST',
+            body: JSON.stringify(reqJSON),
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+
+        })
+            .then(response => response.text())
+            .then(data => {
+                const sampleImage = document.getElementById('sample-img') as HTMLImageElement
+                sampleImage.src = data
+            })
+            .catch(error => console.error(error))
+    }
+
+
     useEffect(() => {
         if (problemId) {
             const xhr = new XMLHttpRequest()
@@ -22,7 +47,6 @@ const ProblemPage = () => {
                 if (xhr.status === 200) {
                     const res = JSON.parse(xhr.responseText)
                     const problems: Problem[] = res
-                    console.log(problems)
                     setProblem(problems.find(problem => problem.id === Number(problemId)))
                 } else {
                     console.error('問題データの取得に失敗しました。')
@@ -32,19 +56,25 @@ const ProblemPage = () => {
         }
     }, [problemId])
 
+    renderSampleImage(problem?.answer!)
+
     return (
         <>
-            <div>
+            <div className='flex py-6 justify-between'>
                 <h1 className='text-xl'>問題{problemId}: {problem?.title}</h1>
+                <SampleCodeButton sampleCode={problem?.answer!} />
             </div>
             <div className="flex justify-center">
                 <Editor editorValue={editorValue} setEditorValue={setEditorValue} />
-                <div className="flex flex-col">
+                <div className="flex flex-col px-10">
                     <Preview />
-                    <div className='answer-container'>
-                    </div>
+                    <SamplePreview />
+                </div>
+                <div className="flex justify-center">
+                    <pre id="sample-code-area"></pre>
                 </div>
             </div>
+
         </>
 
     )
