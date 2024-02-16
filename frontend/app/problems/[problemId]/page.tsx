@@ -64,17 +64,17 @@ const ProblemPage = () => {
                 <h1 className='text-xl'>問題{problemId}: {problem?.title}</h1>
                 <SampleCodeButton sampleCode={problem?.answer!} />
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center h-full">
                 <Editor editorValue={editorValue} setEditorValue={setEditorValue} />
-                <div className="flex flex-col px-10">
+                <div className="preview-containers flex flex-col h-full w-full md:w-1/2 lg:w-1/3">
+                    <div className="sample-code-container flex pb-5">
+                        <pre id="sample-code-area"></pre>
+                    </div>
                     <Preview />
                     <SamplePreview />
-                </div>
-                <div className="flex justify-center">
-                    <pre id="sample-code-area"></pre>
-                </div>
-            </div>
+                </div >
 
+            </div >
         </>
 
     )

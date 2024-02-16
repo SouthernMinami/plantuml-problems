@@ -1,81 +1,94 @@
-// import { fetchProblemsJSON } from "@/api/fetchProblemsJSON";
-'use client';
+"use client"
 
 import Link from "next/link";
 import { Problem } from "../../../types/types";
 import { useEffect, useState } from "react";
 
 const Problems: React.FC = () => {
-    const [problems, setProblems] = useState<Problem[]>([])
+    const [problems, setProblems] = useState<Problem[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const problemsPerPage = 5;
 
     useEffect(() => {
-        const xhr = new XMLHttpRequest()
-        xhr.open('GET', 'problems.json', true)
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'problems.json', true);
         xhr.onload = () => {
             if (xhr.status === 200) {
-                setProblems(JSON.parse(xhr.responseText))
+                setProblems(JSON.parse(xhr.responseText));
             } else {
-                console.error('問題データの取得に失敗しました。')
+                console.error('問題データの取得に失敗しました。');
             }
-        }
-        xhr.send()
-    }, [])
+        };
+        xhr.send();
+    }, []);
+
+    const indexOfLastProblem = currentPage * problemsPerPage;
+    const indexOfFirstProblem = indexOfLastProblem - problemsPerPage;
+    const currentProblems = problems.slice(indexOfFirstProblem, indexOfLastProblem);
+
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
     return (
         <>
-            <div className="my-4">
-                <h1 className="flex justify-center text-4xl font-bold text-black pb-2 pl-3 pr-2">
-                    Excercise Problems
-                </h1>
-                <p className="flex justify-center">練習問題にチャレンジして、構文の理解を深めましょう。</p>
-            </div>
-            <div className="problems-table flex justify-center">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                        <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">
-                                問題ID
-                            </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">
-                                タイトル
-                            </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">
-                                難易度
-                            </th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">
-                                カテゴリー
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {problems.map((problem, index) => {
-                            return (
-                                <tr className="hover:bg-gray-100" key={index}>
-                                    <td className="px-6 py-4 w-1/4">
-                                        <Link href={`problems/page/?problemId=${problem.id}`} className="">
-                                            {problem.id}
-                                        </Link>
-                                    </td>
-                                    <td className="px-6 py-4 w-1/4">
-                                        <Link href={`problems/page/?problemId=${problem.id}`} className="">
-                                            {problem.title}
-                                        </Link>
-                                    </td>
-                                    <td className="px-6 py-4 w-1/4">
-                                        <Link href={`problems/page/?problemId=${problem.id}`} className="">
-                                            {problem.difficulty}
-                                        </Link>
-                                    </td>
-                                    <td className="px-6 py-4 w-1/4">
-                                        <Link href={`problems/page/?problemId=${problem.id}`} className="">
-                                            {problem.category}
-                                        </Link>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
+            <table className="min-w-full divide-y divide-gray-200 border border-gray-200">
+                <thead className="bg-gray-50">
+                    <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            問題ID
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            タイトル
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            難易度
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            カテゴリー
+                        </th>
+                    </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                    {currentProblems.map((problem, index) => {
+                        return (
+                            <tr className="hover:bg-gray-100" key={index}>
+                                <td className="px-6 py-4 w-1/4 border-b border-gray-200">
+                                    <Link href={`problems/page/?problemId=${problem.id}`} className="">
+                                        {problem.id}
+                                    </Link>
+                                </td>
+                                <td className="px-6 py-4 w-1/4 border-b border-gray-200">
+                                    <Link href={`problems/page/?problemId=${problem.id}`} className="">
+                                        {problem.title}
+                                    </Link>
+                                </td>
+                                <td className="px-6 py-4 w-1/4 border-b border-gray-200">
+                                    <Link href={`problems/page/?problemId=${problem.id}`} className="">
+                                        {problem.difficulty}
+                                    </Link>
+                                </td>
+                                <td className="px-6 py-4 w-1/4 border-b border-gray-200">
+                                    <Link href={`problems/page/?problemId=${problem.id}`} className="">
+                                        {problem.category}
+                                    </Link>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table >
+            <div className="pagination px-2 py-10">
+                {Array.from(Array(Math.ceil(problems.length / problemsPerPage)).keys()).map(number => {
+
+                    const isEdgeBtn = number === 0 || number === Math.ceil(problems.length / problemsPerPage) - 1 ? true : false
+                    const roundedClass = number === 0 ? 'rounded-l' : number === Math.ceil(problems.length / problemsPerPage) - 1 ? 'rounded-r' : ''
+
+                    return (
+                        <button key={number} onClick={() => paginate(number + 1)} className={`px-3 py-1 bg-gray-500 text-white border border-gray ${isEdgeBtn ? roundedClass : ''}`}>
+                            {number + 1}
+                        </button>
+                    );
+
+                })}
             </div>
         </>
     )

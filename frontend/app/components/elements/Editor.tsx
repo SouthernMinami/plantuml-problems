@@ -40,7 +40,7 @@ export const Editor = ({ editorValue, setEditorValue }: Props) => {
     }, [])
 
     return (
-        <div className='editor-container'>
+        <div className='editor-container w-full md:w-1/2 lg:w-1/3'>
             <MonacoEditor
                 className={'monaco-editor'}
                 width="50vh"
