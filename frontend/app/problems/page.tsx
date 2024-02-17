@@ -50,40 +50,35 @@ const Problems: React.FC = () => {
                 <tbody className="bg-white divide-y divide-gray-200">
                     {currentProblems.map((problem, index) => {
                         return (
-                            <tr className="hover:bg-gray-100" key={index}>
+                            <tr className="cursor-pointer hover:bg-gray-100" key={index} onClick={() => window.location.href = `problems/page/?problemId=${problem.id}`}>
                                 <td className="px-6 py-4 w-1/4 border-b border-gray-200">
-                                    <Link href={`problems/page/?problemId=${problem.id}`} className="">
-                                        {problem.id}
-                                    </Link>
+                                    {problem.id}
                                 </td>
                                 <td className="px-6 py-4 w-1/4 border-b border-gray-200">
-                                    <Link href={`problems/page/?problemId=${problem.id}`} className="">
-                                        {problem.title}
-                                    </Link>
+                                    {problem.title}
                                 </td>
                                 <td className="px-6 py-4 w-1/4 border-b border-gray-200">
-                                    <Link href={`problems/page/?problemId=${problem.id}`} className="">
-                                        {problem.difficulty}
-                                    </Link>
+                                    {problem.difficulty}
                                 </td>
                                 <td className="px-6 py-4 w-1/4 border-b border-gray-200">
-                                    <Link href={`problems/page/?problemId=${problem.id}`} className="">
-                                        {problem.category}
-                                    </Link>
+                                    {problem.category}
                                 </td>
                             </tr>
                         )
                     })}
                 </tbody>
+
             </table >
             <div className="pagination px-2 py-10">
                 {Array.from(Array(Math.ceil(problems.length / problemsPerPage)).keys()).map(number => {
 
                     const isEdgeBtn = number === 0 || number === Math.ceil(problems.length / problemsPerPage) - 1 ? true : false
-                    const roundedClass = number === 0 ? 'rounded-l' : number === Math.ceil(problems.length / problemsPerPage) - 1 ? 'rounded-r' : ''
+                    const rounded = number === 0 ? 'rounded-l' : number === Math.ceil(problems.length / problemsPerPage) - 1 ? 'rounded-r' : ''
+                    const isCurrentPage = number + 1 === currentPage ? true : false
+                    const bgColor = isCurrentPage ? 'bg-blue-500' : 'bg-gray-500'
 
                     return (
-                        <button key={number} onClick={() => paginate(number + 1)} className={`px-3 py-1 bg-gray-500 text-white border border-gray ${isEdgeBtn ? roundedClass : ''}`}>
+                        <button key={number} onClick={() => paginate(number + 1)} className={`px-3 py-1 ${bgColor} text-white border border-gray ${isEdgeBtn ? rounded : ''}`}>
                             {number + 1}
                         </button>
                     );

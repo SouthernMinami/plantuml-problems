@@ -8,7 +8,7 @@ import { Preview, SamplePreview } from '@/app/components/elements/Preview'
 import { SampleCodeButton } from '@/app/components/elements/buttons/SampleCodeButton'
 
 const ProblemPage = () => {
-    // TODO: problemIdを取得できるようにする
+    // TODO: 問題データ取得処理を別ファイルに切り出して、コンポーネントとして事前にサーバーサイドで作成しておく
     const searchParams = useSearchParams()
     const problemId = searchParams.get('problemId')
 
@@ -67,7 +67,7 @@ const ProblemPage = () => {
             <div className="flex justify-center h-full">
                 <Editor editorValue={editorValue} setEditorValue={setEditorValue} />
                 <div className="preview-containers flex flex-col h-full w-full md:w-1/2 lg:w-1/3">
-                    <div className="sample-code-container flex pb-5">
+                    <div className="sample-code-container flex">
                         <pre id="sample-code-area"></pre>
                     </div>
                     <Preview />

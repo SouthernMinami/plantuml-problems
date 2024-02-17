@@ -19,7 +19,7 @@ export const Header = ({ title }: Props) => {
                         <Link href="/problems">問題一覧</Link>
                     </li>
                     <li className="flex items-center justify-between text-slate-400">
-                        <Link href="/cheatsheet">チートシート</Link>
+                        <Link href="/cheatSheet">チートシート</Link>
                     </li>
                 </ul>
             </nav>

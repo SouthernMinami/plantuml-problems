@@ -1,0 +1,170 @@
+[
+    {
+        "id": 1,
+        "name": "クラス図",
+        "summary": "クラス図は、クラス同士の関係を表すために用いられる構成図です。\n特にオブジェクト指向開発の設計において、クラス図は非常に重要な図となります。",
+        "descriptions": [
+            {
+                "id": 1,
+                "title": "クラス図の基本構文",
+                "content": "・@startumlと@endumlで囲みます\n・クラス名 + 関係を表す記号 + クラス名で、クラスの関係を記述できます。\n・<|--(継承)、<..(実装)、--(関連)、o--(集約)、*--(多重度)、-->(関連)、--o(集約)、--*(多重度)、--(依存)\n/・一般的なプログラミング言語のように、フィールドやメソッドを波括弧{}でくくることも出来ます。"
+            }
+        ],
+        "sampleCodes": [
+            {
+                "id": 1,
+                "code": "@startuml\nclass A {\n  String name;\n  void sayHello();\n}\n\nclass Wallet {\n  int balance;\n}\n\nA -->  Wallet : has\n@enduml"
+            }
+        ],
+        "sampleImages": [
+            {
+                "id": 1,
+                "url": "https://www.plantuml.com/plantuml/png/SoWkIImgAStDuKhEIImkLd1KgEPIK0WkAShCIrV8IynD1VBAyZDJ58eJAprIStBoDJIvQhcWYiCJSt9IIy0wClDA598ISnBpabD1yeuAkhfs2Z05LWePYSLS3gbvAI2B0000"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "シーケンス図",
+        "summary": "",
+        "descriptions": [
+            {
+                "id": 1,
+                "title": "シーケンス図の基本構文",
+                "content": "・@startumlと@endumlで囲みます\n・。"
+            }
+        ],
+        "sampleCodes": [
+            {
+                "id": 1,
+                "code": ""
+            }
+        ],
+        "sampleImages": [
+            {
+                "id": 1,
+                "url": ""
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "アクティビティ図",
+        "summary": "",
+        "descriptions": [
+            {
+                "id": 1,
+                "title": "アクティビティ図の基本構文",
+                "content": "・@startumlと@endumlで囲みます\n・。"
+            }
+        ],
+        "sampleCodes": [
+            {
+                "id": 1,
+                "code": ""
+            }
+        ],
+        "sampleImages": [
+            {
+                "id": 1,
+                "url": ""
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "状態図",
+        "summary": "",
+        "descriptions": [
+            {
+                "id": 1,
+                "title": "状態図の基本構文",
+                "content": "・@startumlと@endumlで囲みます\n・。"
+            }
+        ],
+        "sampleCodes": [
+            {
+                "id": 1,
+                "code": ""
+            }
+        ],
+        "sampleImages": [
+            {
+                "id": 1,
+                "url": ""
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "マインドマップ",
+        "summary": "",
+        "descriptions": [
+            {
+                "id": 1,
+                "title": "マインドマップの基本構文",
+                "content": "・@startumlと@endumlで囲みます\n・。"
+            }
+        ],
+        "sampleCodes": [
+            {
+                "id": 1,
+                "code": ""
+            }
+        ],
+        "sampleImages": [
+            {
+                "id": 1,
+                "url": ""
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "ガントチャート",
+        "summary": "",
+        "descriptions": [
+            {
+                "id": 1,
+                "title": "ガントチャートの基本構文",
+                "content": "・@startumlと@endumlで囲みます\n・。"
+            }
+        ],
+        "sampleCodes": [
+            {
+                "id": 1,
+                "code": ""
+            }
+        ],
+        "sampleImages": [
+            {
+                "id": 1,
+                "url": ""
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "デプロイメント図",
+        "summary": "",
+        "descriptions": [
+            {
+                "id": 1,
+                "title": "デプロイメント図の基本構文",
+                "content": "・@startumlと@endumlで囲みます\n・。"
+            }
+        ],
+        "sampleCodes": [
+            {
+                "id": 1,
+                "code": ""
+            }
+        ],
+        "sampleImages": [
+            {
+                "id": 1,
+                "url": ""
+            }
+        ]
+    }
+]
