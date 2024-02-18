@@ -5,3 +5,12 @@ export type Problem = {
     category: string,
     answer: string,
 }
+
+export type Sheet = {
+    id: number,
+    name: string,
+    summary: string,
+    descriptions: string[],
+    sampleCodes: string[],
+    sampleImages: string[],
+}

@@ -60,7 +60,7 @@
         "title": "基本的なWebアプリ構成",
         "difficulty": "normal",
         "category": "デプロイメント図",
-        "answer": "@startuml\n        node \"Web Server\" as WS { folder \"HTML/CSS/JS\" }\n        node \"Database Server\" as DB { database \"MySQL\" }\n        WS ..> DB : connects to\n        @enduml"
+        "answer": "@startuml\n        node \"Web Server\"\n        node \"App Server\"\n        node \"Database Server\"\n        \"Web Server\" --> \"App Server\" : forwards\n        \"App Server\" ..> \"Database Server\" : uses\n        @enduml"
     },
     {
         "id": 10,

@@ -1,9 +1,31 @@
-import { useEffect } from 'react';
-import MonacoEditor from 'react-monaco-editor';
+'use client'
+
+import { useEffect } from 'react'
+import MonacoEditor from 'react-monaco-editor'
 
 type Props = {
     editorValue: string,
     setEditorValue: (value: string) => void
+}
+
+const render = async (value: string): Promise<void> => {
+    const reqJSON = {
+        "code": value,
+        "extension": "png"
+    }
+
+    // fetch from /backend/api.php
+    const res = await fetch('http://localhost:8003/api.php', {
+        method: 'POST',
+        body: JSON.stringify(reqJSON),
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+    })
+    const data = await res.text()
+
+    const previewImage = document.getElementById('preview-img') as HTMLImageElement
+    previewImage.src = data
 }
 
 export const Editor = ({ editorValue, setEditorValue }: Props) => {
@@ -12,32 +34,9 @@ export const Editor = ({ editorValue, setEditorValue }: Props) => {
         render(value)
     }
 
-    const render = (value: string): void => {
-        const reqJSON = {
-            "code": value,
-            "extension": "png"
-        }
-
-        // fetch from /backend/api.php
-        fetch('http://localhost:8003/api.php', {
-            method: 'POST',
-            body: JSON.stringify(reqJSON),
-            headers: {
-                'Content-Type': 'text/plain'
-            },
-
-        })
-            .then(response => response.text())
-            .then(data => {
-                const previewImage = document.getElementById('preview-img') as HTMLImageElement
-                previewImage.src = data
-            })
-            .catch(error => console.error(error))
-    }
-
     useEffect(() => {
         render(editorValue)
-    }, [])
+    }, [editorValue])
 
     return (
         <div className='editor-container w-full md:w-1/2 lg:w-1/3'>

@@ -9,7 +9,6 @@ export const SheetContent = ({ sheet }: Props) => {
     const sampleCodes = sheet.sampleCodes
     const sampleImages = sheet.sampleImages
 
-    console.log(sheet)
     return (
         <div className="tab-content text-left px-2 py-6 border-b border-gray">
             <h1 className="text-2xl">{sheet.name}</h1>

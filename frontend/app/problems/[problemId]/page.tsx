@@ -2,15 +2,18 @@
 
 import { useEffect, useState } from 'react'
 import { Problem } from "@/app/types/types"
-import { useSearchParams } from 'next/navigation'
 import { Editor } from '@/app/components/elements/Editor'
 import { Preview, SamplePreview } from '@/app/components/elements/Preview'
 import { SampleCodeButton } from '@/app/components/elements/buttons/SampleCodeButton'
 
-const ProblemPage = () => {
-    // TODO: 問題データ取得処理を別ファイルに切り出して、コンポーネントとして事前にサーバーサイドで作成しておく
-    const searchParams = useSearchParams()
-    const problemId = searchParams.get('problemId')
+type Props = {
+    params: {
+        problemId: string
+    }
+}
+
+const ProblemPage = ({ params }: Props) => {
+    const problemId = params.problemId
 
     const [problem, setProblem] = useState<Problem>()
     const [editorValue, setEditorValue] = useState<string>(`@startuml\n    \n@enduml`)

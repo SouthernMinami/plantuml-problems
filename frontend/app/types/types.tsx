@@ -3,7 +3,6 @@ export type Problem = {
     title: string,
     difficulty: string,
     category: string,
-    uml: string,
     answer: string,
 }
 
